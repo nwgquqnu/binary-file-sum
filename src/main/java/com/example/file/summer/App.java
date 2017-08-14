@@ -1,4 +1,4 @@
-package com.example.file_summer;
+package com.example.file.summer;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ public class App {
 			System.out.println("Usage:");
 			System.out.println("\tprogram /path/to/binary/file [--debug]");
 			System.out.println("\t--debug - add it to print calculation time");
-			
+
 			System.out.println("\n\n");
 			System.out.println("To generate file use: ");
 			System.out.println("\tprogram --generate /path/to/file step count");
@@ -26,7 +26,7 @@ public class App {
 			generateFile(args[1], Integer.parseInt(args[2]), Integer.parseInt(args[3]));
 			return;
 		}
-		
+
 		sumFile(args[0], args.length > 1 && DEBUG.equals(args[1]));
 
 	}

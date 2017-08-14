@@ -1,4 +1,4 @@
-package com.example.file_summer;
+package com.example.file.summer;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,23 +9,23 @@ import java.nio.channels.FileChannel;
 public class BinaryFileAdder {
 	private static final int BIGSIZE = 64 * 1024;
 	private static final int SIZE = 8 * 1024;
-	
+
 	private String fileToSum;
 	private byte currentBytePosition = 3;
 	private long totalSum = 0l;
 	private boolean calculated = false;
-	
+
 	public BinaryFileAdder(String fileToSum) {
 		this.fileToSum = fileToSum;
 	}
-	
+
 	public BigInteger calculateSum() throws IOException {
 		if (!calculated) {
 			doCalculate();
 		}
 		return convertToUnsigned(totalSum);
 	}
-	
+
 	private void doCalculate() throws IOException {
 		try (FileInputStream fis = new FileInputStream(fileToSum)) {
 			FileChannel channel = fis.getChannel();
@@ -61,7 +61,7 @@ public class BinaryFileAdder {
 			totalSum += value << (calculateNextBytePosition() * 8);
 		}
 	}
-	
+
 	private byte calculateNextBytePosition() {
 		currentBytePosition += 1;
 		if (currentBytePosition > 3) {
@@ -69,9 +69,9 @@ public class BinaryFileAdder {
 		}
 		return currentBytePosition;
 	}
-	
-	
+
 	private BigInteger convertToUnsigned(long sum) {
+		//@formatter:off
 		return new BigInteger(new byte[] {
 				0,
 				(byte) (sum >>> 56),
@@ -83,7 +83,7 @@ public class BinaryFileAdder {
 				(byte) (sum >>>  8),
 				(byte) (sum >>>  0)
 		});
+		//@formatter:on
 	}
-	
 
 }

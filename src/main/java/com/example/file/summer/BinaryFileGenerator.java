@@ -1,4 +1,4 @@
-package com.example.file_summer;
+package com.example.file.summer;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -21,19 +21,19 @@ public class BinaryFileGenerator {
 	public void generate() throws IOException {
 		Files.deleteIfExists(Paths.get(path));
 		try (FileOutputStream fos = new FileOutputStream(path);
-			 BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+				BufferedOutputStream bos = new BufferedOutputStream(fos)) {
 
 			long totalSum = 0;
 			int value = 0;
-			for(int i = 0; i < count; i++, value+=step) {
-				totalSum +=value;
-				bos.write((byte)(value >>> 0));
-				bos.write((byte)(value >>> 8));
-				bos.write((byte)(value >>> 16));
-				bos.write((byte)(value >>> 24));
+			for (int i = 0; i < count; i++, value += step) {
+				totalSum += value;
+				bos.write((byte) (value >>> 0));
+				bos.write((byte) (value >>> 8));
+				bos.write((byte) (value >>> 16));
+				bos.write((byte) (value >>> 24));
 			}
 			System.out.println("total sum should be " + totalSum);
-			
+
 		}
 	}
 
